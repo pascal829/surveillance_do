@@ -1,0 +1,13 @@
+<!-- surveillance_do/templates/surveillance_do/liste.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1 class="mt-4">Liste des stations de surveillance des DO</h1>
+    <ul class="list-group">
+        {% for station in stations %}
+            <li class="list-group-item"><a href="{% url 'detail_station_surveillance_do' station.id %}">{{ station.nom }}</a></li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'liste_stations_surveillance_do' %}" class="btn btn-primary mt-3">Retour à la page d'accueil</a>
+    <a href="{% url 'accueil' %}" class="btn btn-primary mt-3">Retour à l'accueil de l'appli</a>
+{% endblock %}

@@ -1,0 +1,11 @@
+<!-- surveillance_do/templates/surveillance_do/ajouter_mesure.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1 class="mt-4">Ajouter une mesure pour {{ station.nom }}</h1>
+    <form method="post" class="mt-3">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Ajouter</button>
+    </form>
+{% endblock %}

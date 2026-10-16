@@ -1,0 +1,79 @@
+<!-- surveillance_do/templates/surveillance_do/detail.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1 class="mt-4">{{ station.nom }}</h1>
+    <h2 class="mt-3">Relevés</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Valeur réglet 1</th>
+                <th>Valeur mesurée 1</th>
+                <th>Écart 1</th>
+                <th>Valeur réglet 2</th>
+                <th>Valeur mesurée 2</th>
+                <th>Écart 2</th>
+                <th>Valeur réglet 3</th>
+                <th>Valeur mesurée 3</th>
+                <th>Écart 3</th>
+                <th>Valeur réglet 4</th>
+                <th>Valeur mesurée 4</th>
+                <th>Écart 4</th>
+                <th>Valeur loi hydraulique 1</th>
+                <th>Valeur mesurée débit 1</th>
+                <th>Erreur 1</th>
+                <th>Valeur loi hydraulique 2</th>
+                <th>Valeur mesurée débit 2</th>
+                <th>Erreur 2</th>
+                <th>Valeur loi hydraulique 3</th>
+                <th>Valeur mesurée débit 3</th>
+                <th>Erreur 3</th>
+                <th>Valeur loi hydraulique 4</th>
+                <th>Valeur mesurée débit 4</th>
+                <th>Erreur 4</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for mesure in mesures %}
+                <tr>
+                    <td>{{ mesure.date_mesure }}</td>
+                    <td>{{ mesure.valeur_reglet_1 }}</td>
+                    <td>{{ mesure.valeur_mesuree_1 }}</td>
+                    <td>{{ mesure.ecart_1 }}</td>
+                    <td>{{ mesure.valeur_reglet_2 }}</td>
+                    <td>{{ mesure.valeur_mesuree_2 }}</td>
+                    <td>{{ mesure.ecart_2 }}</td>
+                    <td>{{ mesure.valeur_reglet_3 }}</td>
+                    <td>{{ mesure.valeur_mesuree_3 }}</td>
+                    <td>{{ mesure.ecart_3 }}</td>
+                    <td>{{ mesure.valeur_reglet_4 }}</td>
+                    <td>{{ mesure.valeur_mesuree_4 }}</td>
+                    <td>{{ mesure.ecart_4 }}</td>
+                    <td>{{ mesure.valeur_loi_hydraulique_1 }}</td>
+                    <td>{{ mesure.valeur_mesuree_debit_1 }}</td>
+                    <td>{{ mesure.erreur_1 }}%</td>
+                    <td>{{ mesure.valeur_loi_hydraulique_2 }}</td>
+                    <td>{{ mesure.valeur_mesuree_debit_2 }}</td>
+                    <td>{{ mesure.erreur_2 }}%</td>
+                    <td>{{ mesure.valeur_loi_hydraulique_3 }}</td>
+                    <td>{{ mesure.valeur_mesuree_debit_3 }}</td>
+                    <td>{{ mesure.erreur_3 }}%</td>
+                    <td>{{ mesure.valeur_loi_hydraulique_4 }}</td>
+                    <td>{{ mesure.valeur_mesuree_debit_4 }}</td>
+                    <td>{{ mesure.erreur_4 }}%</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{% url 'ajouter_mesure_surveillance_do' station.id %}" class="btn btn-success mt-3">Ajouter une mesure</a>
+    <a href="{% url 'liste_stations_surveillance_do' %}" class="btn btn-primary mt-3">Retour à la page d'accueil</a>
+
+    <!-- Afficher le graphique -->
+    <h2 class="mt-3">Graphique des mesures</h2>
+    <img src="data:image/png;base64,{{ graph }}" alt="Graphique des mesures" class="img-fluid">
+
+    <!-- Bouton d'export -->
+    <a href="{% url 'export_mesures_surveillance_do' station.id %}" class="btn btn-info mt-3">Exporter les mesures en CSV</a>
+    <a href="{% url 'export_mesures_surveillance_do_pdf' station.id %}" class="btn btn-danger mt-3">Exporter les mesures en PDF</a>
+{% endblock %}
